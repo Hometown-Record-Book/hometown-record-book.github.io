@@ -1,0 +1,622 @@
+---
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hometown Record Book</title>
+<meta name="description" content="Every Season. Every Game. Every Player. Record book websites for high school sports: football, basketball, baseball, volleyball and more.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hometown Record Book">
+<meta property="og:title" content="Hometown Record Book">
+<meta property="og:description" content="Every Season. Every Game. Every Player. Record book websites for high school sports: football, basketball, baseball, volleyball and more.">
+<meta property="og:url" content="{{ site.github.url }}/">
+<meta property="og:image" content="{{ site.github.url }}/share.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Hometown Record Book: Every Season. Every Game. Every Player.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hometown Record Book">
+<meta name="twitter:description" content="Every Season. Every Game. Every Player. Record book websites for high school sports: football, basketball, baseball, volleyball and more.">
+<meta name="twitter:image" content="{{ site.github.url }}/share.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="icon.png">
+<meta name="theme-color" content="#0f1b26">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Libre+Franklin:wght@400;500;600;700&display=swap">
+<style>
+/* A game-night program: dark stadium bands (hero, pricing scoreboard) between chalk-white pages of the book. */
+:root{
+  --night:#0f1b26; --night-2:#16283a; --chalk:#f2f5f3; --paper:#ffffff; --ink:#14212c; --muted:#556472; --line:#d8e0e3;
+  --amber:#f3b23a; --amber-ink:#8a5a00; --turf:#1d7a4e; --on-night:#e9eff3; --on-night-muted:#a9b8c4;
+  --shade:rgba(16,28,40,.12);
+  --display:"Big Shoulders Display","Arial Narrow","Roboto Condensed","DejaVu Sans Condensed",Impact,sans-serif;
+  --body:"Libre Franklin","Franklin Gothic Medium","Helvetica Neue",Arial,sans-serif;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --chalk:#0c151d; --paper:#132230; --ink:#e7edf1; --muted:#9db0bf; --line:#26394b; --amber-ink:#f3b23a; --turf:#4cc38a; --shade:rgba(0,0,0,.4); color-scheme:dark } }
+:root[data-theme="dark"]{ --chalk:#0c151d; --paper:#132230; --ink:#e7edf1; --muted:#9db0bf; --line:#26394b; --amber-ink:#f3b23a; --turf:#4cc38a; --shade:rgba(0,0,0,.4); color-scheme:dark }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{transition:none!important;animation:none!important} }
+body{margin:0;background:var(--chalk);color:var(--ink);font:400 16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+.wrap{max-width:1140px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:1.02;letter-spacing:.005em;text-wrap:balance;margin:0}
+h2{font-size:clamp(34px,5vw,54px);text-transform:uppercase}
+h3{font-size:24px;text-transform:uppercase;letter-spacing:.02em}
+p{margin:0}
+.eyebrow{font:700 12.5px/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--amber-ink)}
+.night .eyebrow{color:var(--amber)}
+.lede{font-size:18px;color:var(--muted);max-width:62ch}
+section{padding-block:84px;scroll-margin-top:60px}
+.sec-head{display:grid;gap:14px;margin-bottom:36px;max-width:760px}
+:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:6px}
+@media (max-width:640px){ section{padding-block:60px} .lede{font-size:17px} }
+
+/* top bar */
+.top{position:sticky;top:0;z-index:20;background:rgba(15,27,38,.95);backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid rgba(255,255,255,.08);padding-top:env(safe-area-inset-top, 0px)}
+.top .wrap{display:flex;align-items:center;gap:20px;min-height:60px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--on-night);min-width:0;flex:0 1 auto}
+.brand svg{width:30px;height:30px;flex:none}
+.brand b{font:800 21px/1.1 var(--display);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.top nav{display:flex;gap:4px;margin-left:auto}
+.top nav a{color:var(--on-night-muted);text-decoration:none;font-weight:600;font-size:14.5px;padding:8px 11px;border-radius:8px}
+.top nav a:hover{color:#fff;background:rgba(255,255,255,.07)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:700 15.5px/1 var(--body);text-decoration:none;border-radius:10px;padding:14px 20px;border:2px solid transparent;cursor:pointer;white-space:nowrap}
+.btn.amber{background:var(--amber);color:#1b1404}
+.btn.amber:hover{background:#ffc657}
+.btn.ghost{border-color:rgba(255,255,255,.32);color:var(--on-night)}
+.btn.ghost:hover{border-color:#fff}
+.top .btn{padding:10px 15px;font-size:14px;flex:none}
+@media (max-width:860px){ .top nav{display:none} .top .btn{margin-left:auto} }
+@media (max-width:520px){ .top .wrap{gap:12px} .brand b{font-size:17px;letter-spacing:.02em} .brand svg{width:26px;height:26px} .top .btn{padding:9px 12px;font-size:13.5px} }
+
+/* hero */
+.night{background:radial-gradient(1200px 520px at 78% -8%, rgba(243,178,58,.16), transparent 62%),
+                  radial-gradient(900px 420px at 8% 0%, rgba(255,255,255,.07), transparent 60%), var(--night);color:var(--on-night)}
+.hero{padding-block:64px 0;overflow:hidden}
+.hero .grid{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.2fr);gap:48px;align-items:center}
+.hero h1{font-size:clamp(44px,6vw,80px);text-transform:uppercase;line-height:.98}
+.hero h1 span,.hero h1 em{display:block}
+.hero h1 em{font-style:normal;color:var(--amber)}
+.hero .lede{color:var(--on-night-muted);margin-top:20px}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.offer{display:inline-flex;align-items:center;gap:8px;margin-top:24px;padding:9px 14px;border-radius:999px;background:rgba(243,178,58,.12);border:1px solid rgba(243,178,58,.4);color:#ffd88d;font-weight:600;font-size:14.5px}
+.offer b{color:var(--amber)}
+.pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.pills .offer{margin-top:0}
+.offer.alt{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.22);color:var(--on-night);text-decoration:none}
+.offer.alt b{color:#fff}
+.offer.alt:hover{border-color:rgba(255,255,255,.5)}
+.stage{position:relative;padding:0 26px 84px 0}
+.laptop{background:#0a1118;border-radius:16px 16px 8px 8px;padding:10px 10px 14px;box-shadow:0 30px 60px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.08) inset}
+.laptop .bar{display:flex;gap:6px;padding:0 4px 8px}
+.laptop .bar i{width:9px;height:9px;border-radius:50%;background:#2d3a46}
+.laptop img{border-radius:6px;width:100%}
+.phone{position:absolute;right:0;bottom:0;width:29%;max-width:200px;background:#0a1118;border-radius:28px;padding:8px;box-shadow:0 26px 50px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.12) inset}
+.phone img{border-radius:21px;aspect-ratio:390/720;object-fit:cover;object-position:top;width:100%}
+@media (max-width:920px){ .hero .grid{grid-template-columns:1fr;gap:40px} .stage{max-width:640px} }
+@media (max-width:640px){ .hero{padding-top:44px} .stage{padding:0 16px 60px 0} .phone{width:32%;border-radius:20px;padding:5px} .phone img{border-radius:16px} }
+
+/* proof */
+.proof{border-top:1px solid rgba(255,255,255,.09);margin-top:56px;padding-block:22px}
+.proof .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;justify-content:space-between}
+.proof p{color:var(--on-night-muted);font-size:14.5px}
+.proof p b{color:var(--on-night)}
+.proof dl{display:flex;flex-wrap:wrap;gap:8px 24px;margin:0}
+.proof dl div{display:flex;align-items:baseline;gap:7px}
+.proof dt{font:800 26px/1 var(--display);color:#fff;font-variant-numeric:tabular-nums}
+.proof dd{margin:0;color:var(--on-night-muted);font-size:13.5px}
+.proof a{color:var(--amber);font-weight:700;text-decoration:none;white-space:nowrap}
+.proof a:hover{text-decoration:underline}
+
+/* why we built it */
+.paper{background:var(--paper);border-block:1px solid var(--line)}
+.why{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center}
+.why h2{font-size:clamp(38px,5.4vw,62px)}
+.points{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.points li{display:grid;grid-template-columns:52px minmax(0,1fr);gap:16px;align-items:center;padding:18px 20px;background:var(--chalk);border:1px solid var(--line);border-radius:14px}
+.points .ic{width:52px;height:52px;border-radius:12px;background:var(--night);display:grid;place-items:center}
+.points svg{width:26px;height:26px;fill:none;stroke:var(--amber);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.points h3{font-size:22px}
+.points p{color:var(--muted);font-size:15.5px;margin-top:4px}
+@media (max-width:860px){ .why{grid-template-columns:1fr;gap:28px} }
+
+/* the tour of the book */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.tab{font:700 15px/1 var(--body);padding:12px 17px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
+.tab:hover{border-color:var(--muted)}
+.tab[aria-selected="true"]{background:var(--night);border-color:var(--night);color:#fff;box-shadow:inset 0 -3px 0 var(--amber)}
+.panel{display:grid;gap:18px}
+.panel[hidden]{display:none}
+.frame{background:#0a1118;border-radius:14px;padding:9px 9px 10px;box-shadow:0 22px 50px var(--shade)}
+.frame .bar{display:flex;align-items:center;gap:6px;padding:0 4px 8px}
+.frame .bar i{width:9px;height:9px;border-radius:50%;background:#2d3a46}
+.frame .bar span{margin-left:10px;font-size:12px;color:#8193a3;background:#141f29;border-radius:6px;padding:3px 10px}
+.frame img{width:100%;aspect-ratio:1400/740;object-fit:cover;object-position:top center;border-radius:6px;background:#f3f5f8}
+.zoom{display:block;width:100%;padding:0;margin:0;border:0;background:none;cursor:zoom-in;border-radius:6px}
+.cap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,2fr);gap:10px 32px;align-items:baseline}
+.cap p{color:var(--muted)}
+.also{list-style:none;margin:34px 0 0;padding:22px 0 0;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 28px}
+.also li{display:grid;grid-template-columns:20px minmax(0,1fr);gap:10px;font-weight:600;font-size:15.5px}
+.also svg,.send li svg{width:20px;height:20px;margin-top:2px;color:var(--turf)}
+@media (max-width:860px){ .also{grid-template-columns:repeat(2,minmax(0,1fr))} .cap{grid-template-columns:1fr} }
+@media (max-width:640px){
+  .tab{padding:10px 14px;font-size:14px}
+  .frame{max-width:300px;margin:0 auto;border-radius:30px;padding:7px}
+  .frame .bar{display:none}
+  .frame img{aspect-ratio:390/700;border-radius:24px}
+  .zoom{border-radius:24px}
+  .also{grid-template-columns:1fr}
+}
+
+/* every sport */
+.sports{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center}
+.sports .lede{color:var(--on-night-muted)}
+.sportlist{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.sportlist li{display:grid;justify-items:start;align-content:start;gap:8px;padding:18px 16px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)}
+.sportlist li:first-child{border-color:rgba(243,178,58,.55);background:rgba(243,178,58,.08)}
+.sportlist svg{width:34px;height:34px;fill:none;stroke:var(--amber);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.sportlist b{font:800 20px/1.05 var(--display);text-transform:uppercase;letter-spacing:.03em;color:#fff}
+.sportlist small{font-size:13px;color:var(--on-night-muted);margin-top:-4px}
+@media (max-width:860px){ .sports{grid-template-columns:1fr;gap:30px} }
+@media (max-width:520px){ .sportlist{grid-template-columns:repeat(2,minmax(0,1fr))} }
+
+/* coaches */
+.coach{background:var(--paper);border-block:1px solid var(--line)}
+.steps{display:grid;gap:64px}
+.step{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:44px;align-items:center}
+.step:nth-child(even){grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr)}
+.step:nth-child(even) .pic{order:-1}
+.num{font:900 64px/.8 var(--display);color:var(--amber-ink)}
+.step .txt{display:grid;gap:12px;align-content:start}
+.step p,.step li{color:var(--muted)}
+.step ul{margin:2px 0 0;padding-left:18px;display:grid;gap:4px}
+.shot{border-radius:12px;overflow:hidden;border:1px solid var(--line);box-shadow:0 18px 40px var(--shade);background:#f3f5f8}
+.combo{position:relative;padding:0 54px 46px 0}
+.combo .mini{position:absolute;right:0;bottom:0;width:27%;max-width:170px;border-radius:22px;border:6px solid #0a1118;overflow:hidden;box-shadow:0 18px 36px rgba(16,28,40,.28);background:#0a1118}
+.combo .mini img{aspect-ratio:390/700;object-fit:cover;object-position:top}
+@media (max-width:860px){ .step,.step:nth-child(even){grid-template-columns:1fr;gap:18px} .step:nth-child(even) .pic{order:0} .steps{gap:48px} }
+@media (max-width:640px){
+  .combo{padding:0} .combo .mini{display:none}
+  .step .shot{max-width:250px;margin:0 auto;border-radius:28px;border:7px solid #0a1118;box-shadow:0 18px 40px var(--shade)}
+  .step .shot img{width:100%}
+}
+
+/* extras */
+.extras{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.extra{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:grid;gap:14px;align-content:start}
+.extra p{color:var(--muted);font-size:15px}
+.extra .tag{justify-self:start;font:700 11.5px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;padding:6px 9px;border-radius:6px;background:rgba(243,178,58,.16);color:var(--amber-ink)}
+.extra .pic{border-radius:10px;border:1px solid var(--line);overflow:hidden}
+.extra .pic img{width:100%}
+.swatches{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.swatches span{width:42px;height:42px;border-radius:10px;border:1px solid rgba(0,0,0,.1)}
+.swatches img{width:64px;height:64px;border-radius:12px;border:1px solid var(--line);background:#fff}
+.linkcard{border-radius:14px;overflow:hidden;background:#e9e9ec;max-width:300px;border:1px solid var(--line)}
+.linkcard img{width:100%;aspect-ratio:1.9;object-fit:contain;background:#fff;padding:12px}
+.linkcard b{display:block;padding:9px 13px 1px;font-size:14.5px;color:#111}
+.linkcard small{display:block;padding:0 13px 10px;color:#666;font-size:12.5px}
+@media (max-width:960px){ .extras{grid-template-columns:1fr} .extra{max-width:640px} }
+
+/* how it works + what to send */
+.how{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start}
+.flow{display:grid;counter-reset:f;margin:0;padding:0;list-style:none}
+.flow li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;padding-block:16px;border-top:1px solid var(--line)}
+.flow li:last-child{border-bottom:1px solid var(--line)}
+.flow li::before{counter-increment:f;content:counter(f);font:900 34px/1 var(--display);color:var(--amber-ink)}
+.flow b{display:block;font-size:17px}
+.flow span{color:var(--muted);font-size:15px}
+.send{background:var(--chalk);border:1px solid var(--line);border-radius:var(--r);padding:26px}
+.send ul{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:11px}
+.send li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;font-size:15.5px;font-weight:600}
+.send li small{display:block;color:var(--muted);font-size:13.5px;font-weight:400}
+.send .note{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line);color:var(--muted);font-size:14px}
+@media (max-width:860px){ .how{grid-template-columns:1fr} }
+
+/* pricing: the scoreboard */
+.board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px;background:#060c12;border:2px solid #060c12;border-radius:18px;overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 30px 60px rgba(0,0,0,.35);margin:0;padding:0;list-style:none}
+.cell{background:linear-gradient(180deg,#132433,#0e1c28);padding:28px 26px 30px;display:grid;gap:12px;align-content:start;min-width:0}
+.cell .lab{font:700 12.5px/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--on-night-muted)}
+.price{font:900 clamp(52px,6vw,72px)/.9 var(--display);color:var(--amber);font-variant-numeric:tabular-nums;letter-spacing:.01em;text-shadow:0 0 18px rgba(243,178,58,.35);white-space:nowrap}
+.price small{font:700 18px/1 var(--display);color:var(--on-night-muted);letter-spacing:.06em;margin:0 4px}
+.cell ul{margin:4px 0 0;padding-left:18px;color:var(--on-night-muted);font-size:15px;display:grid;gap:5px}
+.cell .was{color:#ffd88d;font-weight:600;font-size:15px}
+.cell .was b{color:var(--amber)}
+.launch{margin-top:22px;display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;justify-content:space-between;padding:18px 22px;border-radius:14px;background:rgba(243,178,58,.1);border:1px solid rgba(243,178,58,.35)}
+.launch p{color:#ffe2a8;font-size:16px}
+.launch b{color:var(--amber)}
+.more{margin-top:18px;color:var(--on-night-muted)}
+.more a{color:var(--amber);font-weight:700}
+@media (max-width:900px){ .board{grid-template-columns:1fr} }
+
+/* faq */
+.faq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 22px;align-items:start}
+details{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+summary{cursor:pointer;font-weight:700;font-size:16.5px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font:800 22px/1 var(--display);color:var(--amber-ink)}
+details[open] summary::after{content:"–"}
+details p{margin-top:10px;color:var(--muted);font-size:15.5px}
+@media (max-width:760px){ .faq{grid-template-columns:1fr} }
+
+/* contact */
+.contact .card{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:36px;align-items:center;background:var(--night);color:var(--on-night);border-radius:22px;padding:44px;border:1px solid rgba(255,255,255,.06)}
+.contact h2{color:#fff}
+.contact p{color:var(--on-night-muted);margin-top:12px}
+.mail{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:20px}
+.mail code{font:600 18px/1.2 var(--body);color:#fff;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:13px 15px;user-select:all;overflow-wrap:anywhere}
+.mail button{font:700 14.5px/1 var(--body);padding:14px 16px;border-radius:10px;border:2px solid rgba(255,255,255,.3);background:none;color:#fff;cursor:pointer}
+.mail button:hover{border-color:#fff}
+.ask{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+.ask li{padding:12px 14px;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);font-size:15px;color:var(--on-night);font-weight:600}
+.ask li span{color:var(--on-night-muted);font-weight:400}
+@media (max-width:860px){ .contact .card{grid-template-columns:1fr;padding:28px 20px;gap:24px} .mail code{font-size:16px} }
+footer{padding-block:34px 46px;color:var(--muted);font-size:13.5px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+
+/* enlarged screenshot */
+#lb{padding:0;border:0;background:transparent;max-width:96vw;max-height:94vh;overflow:visible}
+#lb::backdrop{background:rgba(6,12,18,.88)}
+#lb img{max-width:96vw;max-height:88vh;width:auto;height:auto;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+#lb form{display:flex;justify-content:flex-end;margin:0 0 8px}
+#lb button{font:700 14px/1 var(--body);color:#fff;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:9px 13px;cursor:pointer}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Hometown Record Book, top of page">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 7.5c4.2-1.6 8.6-1.4 13 1.3v19c-4.4-2.7-8.8-2.9-13-1.3z" fill="#f3b23a"/><path d="M29 7.5c-4.2-1.6-8.6-1.4-13 1.3v19c4.4-2.7 8.8-2.9 13-1.3z" fill="#e9eff3"/><path d="M6 12.5h7M6 16.5h7M6 20.5h7M19 12.5h7M19 16.5h7M19 20.5h7" stroke="#0f1b26" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <b>Hometown Record Book</b>
+    </a>
+    <nav aria-label="Sections">
+      <a href="#book">What you get</a><a href="#coaches">For coaches</a><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="#faq">Questions</a>
+    </nav>
+    <a class="btn amber" href="#contact">Get a quote</a>
+  </div>
+</header>
+
+<main id="top">
+  <div class="night">
+    <section class="hero">
+      <div class="wrap grid">
+        <div>
+          <p class="eyebrow">For high school sports programs</p>
+          <h1 style="margin-top:14px"><span>Every Season.</span> <span>Every Game.</span> <em>Every Player.</em></h1>
+          <p class="lede">Your school's sports history, online. Send us your stats and we build a record book website with your school's name, logo and colors. Your coaches add each new game in a few minutes, and the records update themselves.</p>
+          <div class="ctas">
+            <a class="btn amber" href="#contact">Get a quote</a>
+            <a class="btn ghost" href="https://gravescountyfootball.github.io" target="_blank" rel="noopener">See a live site ↗</a>
+          </div>
+          <div class="pills"><p class="offer">Launch offer: <b>the first 10 schools pay half</b></p><a class="offer alt" href="#sports">Not just football: <b>every sport</b> ↓</a></div>
+        </div>
+        <div class="stage">
+          <div class="laptop"><div class="bar"><i></i><i></i><i></i></div><img src="img/home.webp" alt="A school's record book home page: its all-time record, seasons, games, players and what's on the site" width="1600" height="1000"></div>
+          <div class="phone"><img src="img/m_thisseason.webp" alt="The This Season page on a phone" width="780" height="1688"></div>
+        </div>
+      </div>
+      <div class="proof">
+        <div class="wrap">
+          <p><b>Live at Graves County High School</b> in Mayfield, Kentucky</p>
+          <dl>
+            <div><dt>41</dt><dd>seasons</dd></div>
+            <div><dt>460+</dt><dd>games</dd></div>
+            <div><dt>1,150+</dt><dd>players</dd></div>
+            <div><dt>185</dt><dd>record lists</dd></div>
+          </dl>
+          <a href="https://gravescountyfootball.github.io" target="_blank" rel="noopener">Visit the Graves County site ↗</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section id="why" class="paper">
+    <div class="wrap why">
+      <div class="sec-head" style="margin-bottom:0">
+        <p class="eyebrow">Why we built it</p>
+        <h2>A record book should be simple</h2>
+        <p class="lede">At the game, finding a record should be easy. Was it just broken? Is one of your kids closing in on it? So we did that for you.</p>
+      </div>
+      <ul class="points">
+        <li><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg></span>
+          <div><h3>Answers in the stands</h3><p>Pull up any record on your phone, right from the bleachers, and see the number to beat.</p></div></li>
+        <li><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1"/><path d="M3 4.5V9h4.5"/><path d="M12 7.5V12l3 2"/></svg></span>
+          <div><h3>Your games, for good</h3><p>Show your kids, or even your grandkids, the games you played in and the numbers you put up.</p></div></li>
+        <li><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V3.5"/><path d="M5 4l14 4.5L5 13"/></svg></span>
+          <div><h3>Build your culture</h3><p>Celebrate your players, past and present, with your whole hometown.</p></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="book">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">What's in the book</p>
+        <h2>Everything your program has done, in one place</h2>
+        <p class="lede">Here's a football record book. Fans, players, parents and alumni can look anything up on a phone, and every page comes from your own stats. Tap through the pages below.</p>
+      </div>
+      <div class="tour">
+        <div class="tabs" role="tablist" aria-label="Pages of the record book">
+          <button class="tab" role="tab" id="t-records" aria-controls="p-records" aria-selected="true" type="button">Records</button>
+          <button class="tab" role="tab" id="t-box" aria-controls="p-box" aria-selected="false" tabindex="-1" type="button">Box scores</button>
+          <button class="tab" role="tab" id="t-player" aria-controls="p-player" aria-selected="false" tabindex="-1" type="button">Players</button>
+          <button class="tab" role="tab" id="t-opp" aria-controls="p-opp" aria-selected="false" tabindex="-1" type="button">Opponents</button>
+          <button class="tab" role="tab" id="t-season" aria-controls="p-season" aria-selected="false" tabindex="-1" type="button">This Season</button>
+          <button class="tab" role="tab" id="t-coaches" aria-controls="p-coaches" aria-selected="false" tabindex="-1" type="button">Coaches</button>
+        </div>
+
+        <div class="panel" role="tabpanel" id="p-records" aria-labelledby="t-records">
+          <div class="frame"><div class="bar"><i></i><i></i><i></i><span>Records</span></div>
+            <button class="zoom" type="button" aria-label="Enlarge the records screenshot"><picture><source media="(max-width: 640px)" srcset="img/m_records.webp" width="780" height="1688"><img src="img/records.webp" alt="Game rushing record lists, ranked, with the year and opponent" width="1400" height="820"></picture></button></div>
+          <div class="cap"><h3>The record book</h3><p>Top performances in every stat for a game, a season and a career: rushing, passing, receiving, scoring, defense, kicking and returns, plus team records. Search for any player, opponent or year.</p></div>
+        </div>
+        <div class="panel" role="tabpanel" id="p-box" aria-labelledby="t-box" hidden>
+          <div class="frame"><div class="bar"><i></i><i></i><i></i><span>Box score</span></div>
+            <button class="zoom" type="button" aria-label="Enlarge the box score screenshot"><picture><source media="(max-width: 640px)" srcset="img/m_box.webp" width="780" height="1688"><img src="img/box.webp" alt="A box score with the score by quarter, team stats, rushing and passing" width="1400" height="711"></picture></button></div>
+          <div class="cap"><h3>Seasons and box scores</h3><p>Every schedule and result, with playoff games, season stats and rosters. Tap any game for its box score: the score by quarter, team stats and who did what.</p></div>
+        </div>
+        <div class="panel" role="tabpanel" id="p-player" aria-labelledby="t-player" hidden>
+          <div class="frame"><div class="bar"><i></i><i></i><i></i><span>Player</span></div>
+            <button class="zoom" type="button" aria-label="Enlarge the player page screenshot"><picture><source media="(max-width: 640px)" srcset="img/m_player.webp" width="780" height="1688"><img src="img/player.webp" alt="A player's page listing the 14 record lists he is on, with his rank on each" width="1400" height="711"></picture></button></div>
+          <div class="cap"><h3>A page for every player</h3><p>Season-by-season stats, a game-by-game log, and every record list he's on, with his rank on each.</p></div>
+        </div>
+        <div class="panel" role="tabpanel" id="p-opp" aria-labelledby="t-opp" hidden>
+          <div class="frame"><div class="bar"><i></i><i></i><i></i><span>Opponents</span></div>
+            <button class="zoom" type="button" aria-label="Enlarge the opponents screenshot"><picture><source media="(max-width: 640px)" srcset="img/m_opponents.webp" width="780" height="1688"><img src="img/opponents.webp" alt="All-time records against each opponent, with home, away and neutral-site records" width="1400" height="711"></picture></button></div>
+          <div class="cap"><h3>Every opponent</h3><p>The all-time record against each team, at home, on the road and at neutral sites, every game by year, and the longest winning streak.</p></div>
+        </div>
+        <div class="panel" role="tabpanel" id="p-season" aria-labelledby="t-season" hidden>
+          <div class="frame"><div class="bar"><i></i><i></i><i></i><span>This Season</span></div>
+            <button class="zoom" type="button" aria-label="Enlarge the This Season screenshot"><picture><source media="(max-width: 640px)" srcset="img/m_thisseason.webp" width="780" height="1688"><img src="img/thisseason.webp" alt="This Season: the current team's record-book lines, players in the book and results so far" width="1400" height="711"></picture></button></div>
+          <div class="cap"><h3>This Season</h3><p>How this year's team is stacking up, game by game: every record-book line a current player has made. It moves on to the next season by itself once that season's first game is in.</p></div>
+        </div>
+        <div class="panel" role="tabpanel" id="p-coaches" aria-labelledby="t-coaches" hidden>
+          <div class="frame"><div class="bar"><i></i><i></i><i></i><span>Coaches</span></div>
+            <button class="zoom" type="button" aria-label="Enlarge the head coaches screenshot"><picture><source media="(max-width: 640px)" srcset="img/m_coaches.webp" width="780" height="1688"><img src="img/coaches.webp" alt="Head coaches with their seasons, records, win percentages and playoff records" width="1400" height="711"></picture></button></div>
+          <div class="cap"><h3>Head coaches</h3><p>Every head coach with his record, win percentage, playoff results, championships and the seasons he coached.</p></div>
+        </div>
+      </div>
+
+      <ul class="also" aria-label="Also included">
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Search for any player, opponent or year</li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Made for phones</li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>NEW badges on new records</li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Team records and playoff history</li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Championship years for every coach</li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Updates as soon as a game is saved</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="night">
+    <section id="sports">
+      <div class="wrap sports">
+        <div class="sec-head" style="margin-bottom:0">
+          <p class="eyebrow">Not just football</p>
+          <h2 style="color:#fff">Every sport. Your whole school.</h2>
+          <p class="lede">Football is what you see here, but we build record books for basketball, baseball, volleyball and every other sport. Want one site for your whole school? Email us and we'll get you a quote.</p>
+          <div class="ctas" style="margin-top:6px"><a class="btn amber" href="#contact">Get a quote for your school</a></div>
+        </div>
+        <ul class="sportlist" aria-label="Sports">
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="12" rx="9.6" ry="5.6" transform="rotate(-45 12 12)"/><path d="M8.8 15.2l6.4-6.4M10 12.6l1.4 1.4M11.3 11.3l1.4 1.4M12.6 10l1.4 1.4"/></svg><b>Football</b><small>Shown here</small></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3v18M5.6 5.6c3.2 3.2 3.2 9.6 0 12.8M18.4 5.6c-3.2 3.2-3.2 9.6 0 12.8"/></svg><b>Basketball</b></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M6.4 5c2.1 1.9 3.2 4.3 3.2 7s-1.1 5.1-3.2 7M17.6 5c-2.1 1.9-3.2 4.3-3.2 7s1.1 5.1 3.2 7"/></svg><b>Baseball &amp; softball</b></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3c-.3 3.6 1.5 6.6 5.6 9.3M12 12c-3.3 2.4-6.8 2.8-8.8 1.6M12 12c3.6 1.6 5.6 4.6 5.7 7.3"/></svg><b>Volleyball</b></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8.2l3 2.2-1.1 3.5h-3.8L9 10.4z"/><path d="M12 8.2V3.4M15 10.4l4.4-1.5M13.9 13.9l2.7 3.8M10.1 13.9l-2.7 3.8M9 10.4L4.6 8.9"/></svg><b>Soccer</b></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20.5h18M5 20.5V10l7-5.2 7 5.2v10.5M9.5 20.5V15h5v5.5"/></svg><b>Your whole school</b><small>Every team, one site</small></li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <section id="coaches" class="coach">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Built for coaches</p>
+        <h2>Add a game in a few minutes</h2>
+        <p class="lede">No spreadsheets to fix and nothing to install. Your coach signs in on the site with a PIN and adds each game from a laptop or a phone.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="txt"><span class="num">1</span><h3>Sign in and set up the season</h3><p>Click Coach login at the top of your site and type the PIN. Only your staff has it.</p><p>Starting a new season? Paste in the roster and the schedule from a spreadsheet, MaxPreps or the school website.</p></div>
+          <div class="pic"><button class="zoom shot" type="button" aria-label="Enlarge the coach home screenshot"><picture><source media="(max-width: 640px)" srcset="img/m_c_home.webp" width="780" height="1500"><img src="img/c_home.webp" alt="The coach's page: the season, the roster, the schedule and the games" loading="lazy" width="1400" height="711"></picture></button></div>
+        </div>
+        <div class="step">
+          <div class="txt"><span class="num">2</span><h3>Bring in the stats</h3><p>After a game, type the score by quarter and the final adds itself up. Then pick the way that suits you for the player stats:</p>
+            <ul><li>The MaxPreps file from Statman or Hudl</li><li>Copy and paste from Arbiter Live, Statman or a spreadsheet</li><li>Type them in, like a stat sheet</li></ul></div>
+          <div class="pic combo"><button class="zoom shot" type="button" aria-label="Enlarge the game entry screenshot"><picture><source media="(max-width: 640px)" srcset="img/m_c_score.webp" width="780" height="1688"><img src="img/c_import.webp" alt="The score by quarter and three ways to bring in the player stats" loading="lazy" width="1400" height="711"></picture></button>
+            <div class="mini"><img src="img/m_coach.webp" alt="The same page on a phone" loading="lazy" width="780" height="1688"></div></div>
+        </div>
+        <div class="step">
+          <div class="txt"><span class="num">3</span><h3>Check the numbers</h3><p>The stats show up like a box score, player by player. The site checks that the points from the player stats match the final score before you save.</p></div>
+          <div class="pic"><button class="zoom shot" type="button" aria-label="Enlarge the stats check screenshot"><picture><source media="(max-width: 640px)" srcset="img/m_c_check.webp" width="780" height="1688"><img src="img/c_check.webp" alt="Pasted stats shown as a box score, with a bar showing the points match the final score" loading="lazy" width="1400" height="875"></picture></button></div>
+        </div>
+        <div class="step">
+          <div class="txt"><span class="num">4</span><h3>Save, and you're done</h3><p>The box score, the season and player pages, and the record book update right away. New records get a NEW badge so fans can spot them.</p></div>
+          <div class="pic"><button class="zoom shot" type="button" aria-label="Enlarge the saved screenshot"><picture><source media="(max-width: 640px)" srcset="img/m_c_saved.webp" width="780" height="1200"><img src="img/c_saved.webp" alt="The saved message after adding a game, with links to the box score" loading="lazy" width="1200" height="469"></picture></button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="extras">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Made for your school</p>
+        <h2>Your colors, your logo, your extras</h2>
+        <p class="lede">Every site is set up for its own school. Tell us what you'd like on yours.</p>
+      </div>
+      <div class="extras">
+        <div class="extra"><span class="tag">Your look</span><h3>School colors and logo</h3>
+          <div class="swatches"><img src="img/demo-logo.png" alt="A sample school logo" width="512" height="512"><span style="background:#5a1a24"></span><span style="background:#a3263b"></span><span style="background:#c9a227"></span></div>
+          <p>The whole site wears your colors, with your school's name and mascot on every page.</p></div>
+        <div class="extra"><span class="tag">Sharing</span><h3>Links that look like you</h3>
+          <div class="linkcard"><img src="img/demo-logo.png" alt="" width="512" height="512"><b>Hometown Football Records</b><small>hometownfootball.github.io</small></div>
+          <p>When someone texts or posts your link, it shows your logo and your site's name, not a Google logo and a string of letters.</p></div>
+        <div class="extra"><span class="tag">Optional</span><h3>Little League champions</h3>
+          <div class="pic"><button class="zoom" type="button" data-full="img/littleleague.webp" aria-label="Enlarge the Little League screenshot"><img src="img/ll_card.webp" alt="Little League championship games by year, with the champion, score and runner-up" loading="lazy" width="780" height="560"></button></div>
+          <p>A page for your youth league's championship games, entered by your coaches. Want something else on your site? Just ask.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="coach">
+    <div class="wrap how">
+      <div>
+        <div class="sec-head" style="margin-bottom:24px">
+          <p class="eyebrow">How it works</p>
+          <h2>From your files to your own site</h2>
+        </div>
+        <ol class="flow">
+          <li><div><b>Send us your stats</b><span>Whatever you have, in the files you already keep. The list shows what helps.</span></div></li>
+          <li><div><b>We build your site</b><span>We put every season, game and record into your record book and set it up with your colors and logo.</span></div></li>
+          <li><div><b>You check it</b><span>We send you a preview. Tell us what to fix before anyone else sees it.</span></div></li>
+          <li><div><b>Go live</b><span>You get your own link to share, and your coach gets the PIN to add games from then on.</span></div></li>
+        </ol>
+      </div>
+      <div class="send">
+        <h3>What to send us</h3>
+        <ul>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><div>Your record book<small>Top-10 lists, record boards, an old program or booklet</small></div></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><div>Game-by-game stats<small>Statman, MaxPreps, Hudl or Arbiter Live files, Excel or Google Sheets</small></div></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><div>Schedules and scores<small>Every season you have, with playoff games marked</small></div></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><div>Rosters<small>Names, numbers and positions</small></div></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><div>Head coaches by year<small>Plus district, region and state titles</small></div></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><div>Your logo and school colors</div></li>
+        </ul>
+        <p class="note">Up to 50 seasons of digital stats are included in the price. Records only on paper? Send what you have and we'll give you a quote.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="night">
+    <section id="pricing">
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="eyebrow">Pricing</p>
+          <h2 style="color:#fff">One price to build it. A small yearly fee to keep it running.</h2>
+        </div>
+        <ul class="board">
+          <li class="cell">
+            <span class="lab">Record Book</span>
+            <span class="price">$2,500</span>
+            <p class="was">First 10 schools: <b>$1,250</b></p>
+            <ul><li>Up to 50 seasons of digital stats</li><li>Every page shown above, in your colors with your logo</li><li>Coach login to add games</li><li>Your own link to share</li></ul>
+          </li>
+          <li class="cell">
+            <span class="lab">More than 50 seasons</span>
+            <span class="price">$3,500+</span>
+            <p class="was">First 10 schools: <b>half off</b></p>
+            <ul><li>Starts at $3,500 for more than 50 seasons</li><li>We look at what you have and give you an exact price</li><li>Everything in the Record Book</li></ul>
+          </li>
+          <li class="cell">
+            <span class="lab">Every year</span>
+            <span class="price">$200<small>/ YEAR</small></span>
+            <p class="was">Billed once a year</p>
+            <ul><li>Keeps your site online and working</li><li>Help for your coach when something comes up</li><li>New features as we add them</li></ul>
+          </li>
+        </ul>
+        <div class="launch"><p><b>Launch offer:</b> our first 10 schools pay half the build price.</p><a class="btn amber" href="#contact">Claim a spot</a></div>
+        <p class="more">Another sport, or one site for your whole school? <a href="#contact">Email us for a quote.</a></p>
+      </div>
+    </section>
+  </div>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="sec-head"><p class="eyebrow">Questions</p><h2>Good to know</h2></div>
+      <div class="faq">
+        <details><summary>Is it just for football?</summary><p>No. Football is shown here, but we build record books for basketball, baseball, volleyball and every other sport, or one site for your whole school. Email us and we'll get you a quote.</p></details>
+        <details><summary>Who adds the games during the season?</summary><p>Your coach or a stats person, with the PIN. Paste the stats from Arbiter Live, Statman or a spreadsheet, choose the MaxPreps file, or type them in. It works on a phone.</p></details>
+        <details><summary>Do we need any software or a server?</summary><p>No. Your site runs on Google, and your stats are kept in a Google Sheet. There's nothing to install.</p></details>
+        <details><summary>Who owns our stats?</summary><p>Your school does. Ask any time and we'll send you a full copy.</p></details>
+        <details><summary>What if our old records are on paper?</summary><p>Send us what you have, even photos or scans, and we'll give you a quote for typing it in.</p></details>
+        <details><summary>Can fans and alumni see it?</summary><p>Yes. Anyone can open your link on a phone or computer. Only your staff can sign in to add or change games.</p></details>
+        <details><summary>What does the yearly fee cover?</summary><p>Keeping your site online and working, help for your coach when something comes up, and new features as we add them.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact" style="padding-top:0">
+    <div class="wrap">
+      <div class="card">
+        <div>
+          <p class="eyebrow">Get a quote</p>
+          <h2 style="margin-top:12px">Put your program's history online</h2>
+          <p>Email us and we'll get back to you with a price and what we need from you.</p>
+          <div class="mail"><a href="mailto:hometownrecordbook@gmail.com" style="text-decoration:none"><code id="addr">hometownrecordbook@gmail.com</code></a><button type="button" id="copy">Copy</button></div>
+        </div>
+        <ul class="ask" aria-label="What to put in your email">
+          <li>Your school <span>and who we should talk to</span></li>
+          <li>Which sports <span>and how many seasons of stats you have</span></li>
+          <li>What they're in <span>Statman, MaxPreps, Excel, paper…</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Hometown Record Book · Every Season. Every Game. Every Player. · hometownrecordbook@gmail.com</span>
+    <span>The screenshots show a made-up school, Hometown High, with made-up names.</span>
+  </div>
+</footer>
+
+<dialog id="lb" aria-label="Enlarged screenshot">
+  <form method="dialog"><button type="submit">Close ✕</button></form>
+  <img id="lbimg" alt="">
+</dialog>
+
+<script>
+  (function () {
+    // tabs: click, or arrow keys once a tab has focus
+    var tabs = [].slice.call(document.querySelectorAll('[role="tab"]'));
+    function pick(t, focus) {
+      tabs.forEach(function (x) {
+        var on = x === t;
+        x.setAttribute('aria-selected', on ? 'true' : 'false');
+        x.tabIndex = on ? 0 : -1;
+        document.getElementById(x.getAttribute('aria-controls')).hidden = !on;
+      });
+      if (focus) t.focus();
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { pick(t); });
+      t.addEventListener('keydown', function (e) {
+        var j = e.key === 'ArrowRight' ? (i + 1) % tabs.length : e.key === 'ArrowLeft' ? (i - 1 + tabs.length) % tabs.length
+              : e.key === 'Home' ? 0 : e.key === 'End' ? tabs.length - 1 : -1;
+        if (j > -1) { e.preventDefault(); pick(tabs[j], true); }
+      });
+    });
+
+    // enlarge a screenshot
+    var lb = document.getElementById('lb'), big = document.getElementById('lbimg');
+    [].forEach.call(document.querySelectorAll('.zoom'), function (z) {
+      z.addEventListener('click', function () {
+        var im = z.querySelector('img');
+        big.src = z.getAttribute('data-full') || im.currentSrc || im.src; big.alt = im.alt;
+        if (lb.showModal) lb.showModal(); else window.open(big.src, '_blank');
+      });
+    });
+    lb.addEventListener('click', function (e) { if (e.target === lb || e.target === big) lb.close(); });
+
+    // copy the email address
+    var b = document.getElementById('copy'), a = document.getElementById('addr');
+    b.addEventListener('click', function () {
+      var done = function () { b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy'; }, 1800); };
+      var sel = function () { var r = document.createRange(); r.selectNodeContents(a); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Press Ctrl+C to copy'; };
+      try { navigator.clipboard.writeText(a.textContent).then(done, sel); } catch (e) { sel(); }
+    });
+  })();
+</script>
+</body>
+</html>
